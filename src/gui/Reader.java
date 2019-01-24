@@ -27,11 +27,6 @@ public class Reader implements Runnable{
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		VideoCapture camera=new VideoCapture(0);
-		
-		 MatOfRect rostros = new MatOfRect();//Guarda los rostros que va capturando
-         MatOfByte mem = new MatOfByte();//Se encarga de hacerlo binario
-         
-         Rect[] facesArray = null;
          
 		if(!camera.isOpened()){
 			System.out.println("Error");
@@ -45,7 +40,7 @@ public class Reader implements Runnable{
 					Imgcodecs.imwrite(filePath, frame);
 					try {
 						qr.reconocer(filePath);
-						reconocimientoFacial.reconocer(frame, frame_gray, rostros, facesArray);
+						reconocimientoFacial.reconocer(frame, frame_gray);
 					} catch (NotFoundException | WriterException | IOException e) {
 						e.printStackTrace();
 					}
