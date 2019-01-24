@@ -4,162 +4,26 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="lib" path="lib/zxing-1.7-javase.jar"/>
 	<classpathentry kind="lib" path="lib/zxing-core-2.0.jar"/>
-	<classpathentry kind="lib" path="D:/opencv/build/java/opencv-400.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/opencv/build/java/x64"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/jar_files (1)/javacpp-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/javacv-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/videoinput-0.200-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-platform-4.0.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/javacv-platform-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/videoinput-0.200-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/videoinput-platform-0.200-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-android-arm.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-android-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-android-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-android-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-platform-2.3.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-android-arm.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-android-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-android-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-android-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-platform-4.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-android-arm.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-android-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-android-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-android-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-platform-1.07-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-platform-2.13.3.31-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-android-arm.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-android-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-android-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-android-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-platform-1.77.0-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/opencv-400.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/videoinput-0.200-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/artoolkitplus-2.3.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/ffmpeg-4.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flandmark-1.07-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-android-aarch64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-android-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-linux-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-linux-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-linux-armv6hf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-linux-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-solaris-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-solaris-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2-natives-windows-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/gluegen-rt-main-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-android-aarch64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-android-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-linux-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-linux-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-linux-armv6hf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-linux-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-solaris-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-solaris-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2-natives-windows-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jocl-main-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-android-aarch64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-android-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-linux-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-linux-armv6.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-linux-armv6hf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-linux-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-macosx-universal.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-solaris-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-solaris-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-windows-amd64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2-natives-windows-i586.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/jogl-all-main-2.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/flycapture-2.13.3.31-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/leptonica-1.77.0-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-2.2.5-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libdc1394-platform-2.2.5-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-0.5.3-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect-platform-0.5.3-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-0.2.0-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-0.2.0-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-0.2.0-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-0.2.0-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-0.2.0-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/libfreenect2-platform-0.2.0-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-1.12.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/librealsense-platform-1.12.1-1.4.4.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-android-arm.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-android-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-android-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-android-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-ios-arm64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-ios-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-linux-armhf.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-linux-ppc64le.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-linux-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-linux-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-macosx-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-windows-x86_64.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4-windows-x86.jar"/>
-	<classpathentry kind="lib" path="lib/jar_files (1)/opencv-4.0.1-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/javacpp-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/javacv-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/javacv-platform-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-platform-4.0.1-1.4.4.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-android-arm.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-android-arm64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-android-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-android-x86.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-ios-arm64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-ios-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-linux-armhf.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-linux-ppc64le.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-linux-x86.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-macosx-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/videoinput-0.200-1.4.4-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/videoinput-0.200-1.4.4-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/jar_files/videoinput-platform-0.200-1.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

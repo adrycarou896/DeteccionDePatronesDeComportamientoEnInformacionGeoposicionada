@@ -8,6 +8,7 @@ public class Invoker {
     	Reader reader = new Reader();
     	Thread thReader = new Thread(reader);
         
-        thReader.run();
+        //thReader.run();
+    	thRecorder.run();
     }
 }
