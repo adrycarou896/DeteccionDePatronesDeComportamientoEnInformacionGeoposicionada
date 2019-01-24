@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
+
+import org.opencv.core.Mat;
+
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatReader;
@@ -18,7 +21,15 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 public class Read_QR {
 	 
-	 public String readQRCode(String filePath) throws WriterException, IOException, NotFoundException{
+	 public void reconocer(String filePath) throws NotFoundException, WriterException, IOException{
+		 String info = readQRCode(filePath);
+			if(info!=null){
+				System.out.println("Frame Obtained");
+				System.out.println("OK -> "+info);
+			}
+	 }
+	 
+	 private String readQRCode(String filePath) throws WriterException, IOException, NotFoundException{
 		 String info = null;
 		 try {
              Map < EncodeHintType, ErrorCorrectionLevel > hintMap = new HashMap < EncodeHintType, ErrorCorrectionLevel > ();
@@ -31,7 +42,7 @@ public class Read_QR {
 		 return info;
 	 }
 	 
-	 public String getQRText(String filePath, Map hintMap) throws FileNotFoundException, IOException, NotFoundException {
+	 private String getQRText(String filePath, Map hintMap) throws FileNotFoundException, IOException, NotFoundException {
 		 
 		 BinaryBitmap binaryBitmap = new BinaryBitmap(new HybridBinarizer(
 	         new BufferedImageLuminanceSource(

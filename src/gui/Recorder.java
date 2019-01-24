@@ -50,11 +50,7 @@ public class Recorder implements Runnable{
     					//Imgcodecs.imwrite(filePath, frameM);
                     cvSaveImage(filePath, img);
                     	
-                    String info = qr.readQRCode(filePath);
-                    if(info!=null){
-						System.out.println("Frame Obtained");
-						System.out.println("OK -> "+info);
-					}
+                    qr.reconocer(filePath);
     				//}
               
                     canvas.showImage(converter.convert(img));
