@@ -30,5 +30,8 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/opencv/build/java/x64"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacpp.jar"/>
+	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv-windows-x86.jar"/>
+	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
