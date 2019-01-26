@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="lib/zxing-1.7-javase.jar"/>
 	<classpathentry kind="lib" path="lib/zxing-core-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/opencv-400.jar"/>
@@ -25,13 +29,13 @@
 	<classpathentry kind="lib" path="lib/jar_files/videoinput-0.200-1.4.4-windows-x86_64.jar"/>
 	<classpathentry kind="lib" path="lib/jar_files/videoinput-0.200-1.4.4-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/jar_files/videoinput-platform-0.200-1.4.4.jar"/>
-	<classpathentry kind="lib" path="D:/opencv/build/java/opencv-400.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/opencv/build/java/x64"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacpp.jar"/>
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv.jar"/>
+	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-400.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/opencv/build/java/x64"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
