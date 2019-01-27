@@ -1,8 +1,11 @@
 package gui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.opencv.core.*;
+//import org.bytedeco.javacpp.opencv_core.*;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
 
@@ -40,7 +43,11 @@ public class Reader implements Runnable{
 					Imgcodecs.imwrite(filePath, frame);
 					try {
 						qr.reconocer(filePath);
-						reconocimientoFacial.reconocer(frame, frame_gray);
+						try {
+							reconocimientoFacial.reconocer(frame, frame_gray);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					} catch (NotFoundException | WriterException | IOException e) {
 						e.printStackTrace();
 					}

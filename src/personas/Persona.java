@@ -1,17 +1,38 @@
 package personas;
 
+import java.util.List;
+
 import org.opencv.core.Rect;
+
+import reconocimiento.FeatureExtractionImage;
+import reconocimiento.FeatureExtractionImage2;
 
 public class Persona {
 	
 	private String nombre;
-	private Rect rostro;
-	private String rutaImagen;
+	private String ruta;
+	private FeatureExtractionImage featureExtractionImage;
 	
-	public Persona(String nombre, Rect rostro, String rutaImagen){
+	public Persona(String nombre){
 		this.nombre = nombre;
-		this.rostro = rostro;
-		this.rutaImagen = rutaImagen;
+		this.ruta = "img/"+this.nombre+".jpg";
+		this.featureExtractionImage = new FeatureExtractionImage2(this.ruta);
+	}
+
+	public String getRuta() {
+		return ruta;
+	}
+
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+
+	public FeatureExtractionImage getFeatureExtractionImage() {
+		return featureExtractionImage;
+	}
+
+	public void setFeatureExtractionImage(FeatureExtractionImage featureExtractionImage) {
+		this.featureExtractionImage = featureExtractionImage;
 	}
 
 	public String getNombre() {
@@ -21,22 +42,8 @@ public class Persona {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public Rect getRostro() {
-		return rostro;
-	}
-
-	public void setRostro(Rect rostro) {
-		this.rostro = rostro;
-	}
-
-	public String getRutaImagen() {
-		return rutaImagen;
-	}
-
-	public void setRutaImagen(String rutaImagen) {
-		this.rutaImagen = rutaImagen;
-	}
+	
+	
 	
 	
 }
