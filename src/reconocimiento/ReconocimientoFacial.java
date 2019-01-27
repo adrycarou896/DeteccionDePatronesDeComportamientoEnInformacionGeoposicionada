@@ -1,75 +1,18 @@
 package reconocimiento;
 
-
-
 import static org.opencv.objdetect.Objdetect.CASCADE_SCALE_IMAGE;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
-import java.util.Set;
-
-import static com.googlecode.javacv.cpp.opencv_core.CV_32SC1;
-import static com.googlecode.javacv.cpp.opencv_core.IPL_DEPTH_8U;
-import static com.googlecode.javacv.cpp.opencv_core.cvCreateImage;
-import static com.googlecode.javacv.cpp.opencv_core.cvGetSeqElem;
-import static com.googlecode.javacv.cpp.opencv_core.cvGetSize;
-import static com.googlecode.javacv.cpp.opencv_core.cvLoad;
-import static com.googlecode.javacv.cpp.opencv_core.cvSetImageROI;
-import static com.googlecode.javacv.cpp.opencv_highgui.cvLoadImage;
-import static com.googlecode.javacv.cpp.opencv_highgui.cvSaveImage;
-import static com.googlecode.javacv.cpp.opencv_imgproc.CV_BGR2GRAY;
-import static com.googlecode.javacv.cpp.opencv_imgproc.CV_INTER_LINEAR;
-import static com.googlecode.javacv.cpp.opencv_imgproc.cvCvtColor;
-import static com.googlecode.javacv.cpp.opencv_imgproc.cvEqualizeHist;
-import static com.googlecode.javacv.cpp.opencv_imgproc.cvResize;
-import static com.googlecode.javacv.cpp.opencv_objdetect.cvHaarDetectObjects;
 //import static org.bytedeco.javacpp.opencv_core.IplImage;
 import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
 import org.opencv.core.Size;
-import org.opencv.highgui.Highgui;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
-//import org.bytedeco.javacpp.opencv_objdetect.CascadeClassifier;
-
-import com.googlecode.javacpp.Loader;
-import com.googlecode.javacv.cpp.opencv_objdetect;
-import com.googlecode.javacv.cpp.opencv_contrib.FaceRecognizer;
-import com.googlecode.javacv.cpp.opencv_core.CvMat;
-import com.googlecode.javacv.cpp.opencv_core.CvMemStorage;
-import com.googlecode.javacv.cpp.opencv_core.CvRect;
-import com.googlecode.javacv.cpp.opencv_core.CvSeq;
-import com.googlecode.javacv.cpp.opencv_objdetect.CvHaarClassifierCascade;
-import com.googlecode.javacv.cpp.opencv_core.IplImage;
-//import static org.bytedeco.javacpp.opencv_objdetect.*;
-import com.googlecode.javacv.cpp.opencv_core.MatVector;
-
-/*import java.io.File;
-
-import org.bytedeco.javacpp.IntPointer;
-import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
-import org.bytedeco.javacpp.opencv_face.LBPHFaceRecognizer;
-import org.bytedeco.javacpp.DoublePointer;
-
-import org.bytedeco.javacv.Frame;
-import org.bytedeco.javacv.FrameGrabber.Exception;
-import org.bytedeco.javacv.OpenCVFrameConverter;
-import org.bytedeco.javacv.OpenCVFrameGrabber;
-
-import static org.bytedeco.javacpp.opencv_core.*;
-import static org.bytedeco.javacpp.opencv_face.*;
-import static org.bytedeco.javacpp.opencv_highgui.*;
-import static org.bytedeco.javacpp.opencv_imgproc.*;
-import static org.bytedeco.javacpp.opencv_objdetect.*;*/
 
 import personas.Persona;
 
