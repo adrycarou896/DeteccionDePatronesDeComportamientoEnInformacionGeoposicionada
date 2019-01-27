@@ -116,9 +116,9 @@ public class ReconocimientoFacial {
         Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
         double w = frame.width();
         double h = frame.height();
-        //El 1.1 -> factor de escala de reducción de imagen (cuanto más grande menos preciso va a ser)
-        //new Size(30, 30) -> tamaño minimo de caras a detectar
-        //new Size(w, h) -> tamaño máximo de caras a detectar
+        //El 1.1 -> factor de escala de reducciï¿½n de imagen (cuanto mï¿½s grande menos preciso va a ser)
+        //new Size(30, 30) -> tamaï¿½o minimo de caras a detectar
+        //new Size(w, h) -> tamaï¿½o mï¿½ximo de caras a detectar
         Cascade.detectMultiScale(frame_gray, rostros, 1.1, 2, 0|CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h));
         Rect[] rostrosLista = rostros.toArray();
         
@@ -148,7 +148,7 @@ public class ReconocimientoFacial {
         		else{
         			System.out.println("No se ha encontrado a la persona");
         		}
-        		//System.out.println("¿ PERSONA"+(facesArray.size()-1)+" Y "+"PERSONA"+facesArray.size()+" SON LA MISMA PERSONA? -> "+mismaPersona);
+        		//System.out.println("ï¿½ PERSONA"+(facesArray.size()-1)+" Y "+"PERSONA"+facesArray.size()+" SON LA MISMA PERSONA? -> "+mismaPersona);
 			}
     		
         }
