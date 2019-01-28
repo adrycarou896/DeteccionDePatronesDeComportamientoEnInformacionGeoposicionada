@@ -87,7 +87,7 @@ public class FeatureDescriptionImage {
 		ptMat2.fromList(ptList2);
 
 		Mat mask = new Mat();
-		Mat H = Calib3d.findHomography(ptMat2, ptMat1, Calib3d.RANSAC, 5, mask);
+		Calib3d.findHomography(ptMat2, ptMat1, Calib3d.RANSAC, 5, mask);
 
 		List<DMatch> goodMatchesListRANSAC = new ArrayList<DMatch>();
 		MatOfDMatch goodMatchesRANSAC = new MatOfDMatch();

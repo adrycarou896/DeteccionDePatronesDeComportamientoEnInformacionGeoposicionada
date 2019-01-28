@@ -5,7 +5,6 @@ import static org.opencv.objdetect.Objdetect.CASCADE_SCALE_IMAGE;
 import java.util.ArrayList;
 import java.util.List;
 //import static org.bytedeco.javacpp.opencv_core.IplImage;
-import org.bytedeco.javacv.OpenCVFrameConverter;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -14,11 +13,9 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
-import personas.Persona;
+import personas.Person;
 
 public class ReconocimientoFacial {
-	
-	private  OpenCVFrameConverter.ToIplImage converter;
 	 
     private String RutaDelCascade = "C:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt2.xml";
     private CascadeClassifier Cascade;
@@ -26,31 +23,16 @@ public class ReconocimientoFacial {
     private MatOfRect rostros;//Guarda los rostros que va capturando
     private List<Rect> facesArray ;
     
-    private List<Persona> personas;
-    
     int highConfidenceLevel = 70;
     
+    private List<Person> persons;
+    
     public ReconocimientoFacial(){
-    	this.converter = new OpenCVFrameConverter.ToIplImage();
-    	
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
     	this.facesArray = new ArrayList<Rect>();
-    	
-    	this.personas = new ArrayList<Persona>();
-    	
-    	inicializarPersonas();
-    }
-    
-    private void inicializarPersonas(){
-    	String nombre1 = "ADRIAN";
-    	String nombre2 = "CHUS";
-    	
-		Persona persona1 = new Persona(nombre1);
-		Persona persona2 = new Persona(nombre2);
-		
-		personas.add(persona1);
-		personas.add(persona2);
+
+    	this.persons = new ArrayList<Person>();
     }
     
 	public void reconocer(Mat frame, Mat frame_gray) throws Exception{
@@ -71,6 +53,7 @@ public class ReconocimientoFacial {
         	facesArray.add(rostro);
     
     		//String nombre = "persona"+facesArray.size();
+        	//String rutaImagen = "img/"+nombre+".jpg";
     		String rutaImagen = "img/"+"persona"+".jpg";
     	    
     		//Se recorta la imagen
@@ -80,26 +63,28 @@ public class ReconocimientoFacial {
     		//Se guarda la imagen
     		Imgcodecs.imwrite(rutaImagen, frame);
     		
-    		for (Persona persona : personas) {
-    			FeatureExtractionImage feaExtImgActual = new FeatureExtractionImage2(rutaImagen);
-       		 
-        		boolean mismaPersona = new FeatureDescriptionImage(persona.getFeatureExtractionImage(), feaExtImgActual).describeFeature();
-        		
-        		if(mismaPersona){
-        			System.out.println("ESTA PERSONA ES -> "+persona.getNombre());
-        		}
-        		else{
-        			System.out.println("No se ha encontrado a la persona");
-        		}
-        		//System.out.println("� PERSONA"+(facesArray.size()-1)+" Y "+"PERSONA"+facesArray.size()+" SON LA MISMA PERSONA? -> "+mismaPersona);
+    		FeatureExtractionImage feaExtImgActual = new FeatureExtractionImage2(rutaImagen);
+    		boolean coincideConPersona = false;
+    		for (Person person : this.persons) {
+    			List<FeatureExtractionImage> featureExtractionImageLista = person.getFeatureExtractionImageLista();
+    			for (FeatureExtractionImage featureExtractionImage : featureExtractionImageLista) {
+    				boolean mismaPersona = new FeatureDescriptionImage(featureExtractionImage, feaExtImgActual).describeFeature();
+        			if(mismaPersona){
+        				person.addFeatureExtractionImage(rutaImagen, frame);
+        				coincideConPersona = true;
+        				System.out.println("ESTA PERSONA ES -> "+person.getNombre());
+        				break;
+        			}
+    			}
 			}
+    		if(!coincideConPersona){
+    			Person person = new Person("persona"+this.persons.size());
+    			person.addFeatureExtractionImage(rutaImagen, frame);
+    			this.persons.add(person);
+    			System.out.println("No ha encontrado una nueva persona");
+    		}
     		
-        }
-        
-        //System.out.println("Rostros detectados: "+facesArray.size());//CANTIDAD DE CARAS ENCONTRADAS
-        
-        
-       
+        } 
 	}
 	 
 }

@@ -1,2 +1,0 @@
-PUNTOS1 -> Mat [ 3041*1*CV_32FC(7), isCont=true, isSubmat=false, nativeObj=0x5f4edf30, dataAddr=0x5e6e7f40 ]
-PUNTOS2 -> Mat [ 2881*1*CV_32FC(7), isCont=true, isSubmat=false, nativeObj=0x5f4ede50, dataAddr=0x5e6fcc40 ]

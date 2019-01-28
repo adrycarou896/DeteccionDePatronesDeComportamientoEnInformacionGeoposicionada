@@ -227,8 +227,8 @@ public class ImageProcesser {
 					forSave2[l] = (byte) (interPolatOrie[i][j][l]);
 				}
 
-				saveImage(forSaving1, "MAG_O" + i + "I" + j, "Corner/");
-				saveImage(forSaving2, "ORIE_O" + i + "I" + j, "Corner/");
+				saveImage(forSaving1, "MAG_O" + i + "I" + j, "MinMaxTest/");
+				saveImage(forSaving2, "ORIE_O" + i + "I" + j, "MinMaxTest/");
 
 			}
 		}
