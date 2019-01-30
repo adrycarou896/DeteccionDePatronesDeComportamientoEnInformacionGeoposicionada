@@ -45,5 +45,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/opencv/build/java/x64"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="lib/surf/junit/junit-4.6.jar"/>
+	<classpathentry kind="lib" path="lib/surf/commons-collections4-4.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

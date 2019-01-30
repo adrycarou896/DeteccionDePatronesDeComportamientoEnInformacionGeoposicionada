@@ -13,7 +13,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
 
 import QR.Read_QR;
-import reconocimiento.ReconocimientoFacial;
+import reconocimientoSIFT.ReconocimientoFacial;
 
 public class Reader implements Runnable{
 	
@@ -44,7 +44,7 @@ public class Reader implements Runnable{
 					try {
 						qr.reconocer(filePath);
 						try {
-							reconocimientoFacial.reconocer(frame, frame_gray);
+							reconocimientoFacial.reconocerConSURF(frame, frame_gray);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
