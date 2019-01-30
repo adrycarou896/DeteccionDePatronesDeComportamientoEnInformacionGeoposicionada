@@ -28,7 +28,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package reconocimientoSURF;
+package reconocimiento.reconocimientoSURF;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -325,7 +325,7 @@ public class Surf implements Serializable {
 	}
 	
 	public Map<SURFInterestPoint,SURFInterestPoint> getMatchingPoints(Surf descriptor, boolean upright){
-		System.out.println("Finding matching points..");
+		//System.out.println("Finding matching points..");
 		Map<SURFInterestPoint,SURFInterestPoint> matchingPoints = new HashMap<SURFInterestPoint,SURFInterestPoint>();
 		List<SURFInterestPoint> points = upright ? getUprightInterestPoints() : getFreeOrientedInterestPoints();
 		
@@ -353,7 +353,7 @@ public class Surf implements Serializable {
 				matchingPoints.put(a,possibleMatch);
 			}
 		}
-		System.out.println("Done finding matching points");
+		//System.out.println("Done finding matching points");
 		return matchingPoints;
 	}
 	

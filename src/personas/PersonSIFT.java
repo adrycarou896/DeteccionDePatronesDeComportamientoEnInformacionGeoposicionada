@@ -3,24 +3,21 @@ package personas;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 
-import reconocimientoSIFT.FeatureExtractionImage;
-import reconocimientoSURF.SURFInterestPoint;
+import reconocimiento.reconocimientoSIFT.FeatureExtractionImage;
 
-public class Person {
+public class PersonSIFT {
 	
 	private List<FeatureExtractionImage> featureExtractionImageLista;
-	private List<Map<SURFInterestPoint,SURFInterestPoint>> listaImagenesSurf;
 	
 	private String nombre;
 	
 	private String ruta;
 	
-	public Person(String nombre){
+	public PersonSIFT(String nombre){
 		this.nombre = nombre;
 		
 		this.ruta = "img/"+this.nombre;
@@ -50,14 +47,6 @@ public class Person {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<Map<SURFInterestPoint, SURFInterestPoint>> getListaImagenesSurf() {
-		return listaImagenesSurf;
-	}
-
-	public void setListaImagenesSurf(List<Map<SURFInterestPoint, SURFInterestPoint>> listaImagenesSurf) {
-		this.listaImagenesSurf = listaImagenesSurf;
 	}
 	
 	

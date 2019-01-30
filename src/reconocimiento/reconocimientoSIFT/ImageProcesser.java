@@ -6,7 +6,7 @@
 //https://www.youtube.com/watch?v=NPcMS49V5hg
 //https://www.youtube.com/watch?v=oT9c_LlFBqs
 
-package reconocimientoSIFT;
+package reconocimiento.reconocimientoSIFT;
 
 import static java.lang.Float.MAX_VALUE;
 import static java.lang.Math.abs;
@@ -40,7 +40,7 @@ import org.opencv.core.KeyPoint;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
-import reconocimientoSIFT.m.LoggingConfig;
+import reconocimiento.reconocimientoSIFT.m.LoggingConfig;
 
 //
 /**

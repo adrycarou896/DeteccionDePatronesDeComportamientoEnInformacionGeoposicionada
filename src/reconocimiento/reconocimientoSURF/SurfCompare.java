@@ -28,7 +28,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package reconocimientoSURF;
+package reconocimiento.reconocimientoSURF;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -102,13 +102,13 @@ public class SurfCompare extends JPanel {
 
 	      int numAPoints = mUpright ? mSurfA.getUprightInterestPoints().size() :
 	          mSurfA.getFreeOrientedInterestPoints().size();
-	      System.out.println("Image A has " + numAPoints + " with " + mAMatchingPoints.size()
-	          + " which match B");
+	      //System.out.println("Image A has " + numAPoints + " with " + mAMatchingPoints.size()
+	        //  + " which match B -> "+ mUpright);
 	
 	      int numBPoints = mUpright ? mSurfB.getUprightInterestPoints().size() :
 	          mSurfB.getFreeOrientedInterestPoints().size();
-	      System.out.println("Image B has " + numBPoints + " with " + mBMatchingPoints.size()
-	          + " which match A");
+	      //System.out.println("Image B has " + numBPoints + " with " + mBMatchingPoints.size()
+	        //  + " which match A -> "+ mUpright);
 	      
 	    HashMap<Integer,Integer> valores = new HashMap<Integer,Integer>();
 	    valores.put(0, numAPoints);
@@ -154,27 +154,31 @@ public class SurfCompare extends JPanel {
     private void drawConnectingPoints(Graphics g){
     	Graphics2D g2d = (Graphics2D)g;
     	g2d.setColor(Color.GREEN);
-	int offset = mImageAWidth;
+    	int offset = mImageAWidth;
     	for ( SURFInterestPoint point : mAMatchingPoints.keySet() ){
     		int x = (int)(mImageAXScale * point.getX());
     		int y = (int)(mImageAYScale * point.getY());
     		g2d.drawOval(x-BASE_CIRCLE_DIAMETER/2,y-BASE_CIRCLE_DIAMETER/2,BASE_CIRCLE_DIAMETER,BASE_CIRCLE_DIAMETER);
-		SURFInterestPoint target = mAMatchingPoints.get(point);
-		int tx = (int)(mImageBXScale * target.getX()) + offset;
+    		
+    		SURFInterestPoint target = mAMatchingPoints.get(point);
+    		int tx = (int)(mImageBXScale * target.getX()) + offset;
     		int ty = (int)(mImageBYScale * target.getY());
-		g2d.drawOval(tx-TARGET_CIRCLE_DIAMETER/2,ty-TARGET_CIRCLE_DIAMETER/2,TARGET_CIRCLE_DIAMETER,TARGET_CIRCLE_DIAMETER);
-		g2d.drawLine(x,y,tx,ty);
+    		
+    		g2d.drawOval(tx-TARGET_CIRCLE_DIAMETER/2,ty-TARGET_CIRCLE_DIAMETER/2,TARGET_CIRCLE_DIAMETER,TARGET_CIRCLE_DIAMETER);
+    		g2d.drawLine(x,y,tx,ty);
     	}
     	g2d.setColor(Color.BLUE);
     	for ( SURFInterestPoint point : mBMatchingPoints.keySet() ){
     		int x = (int)(mImageBXScale * point.getX()) + offset;
     		int y = (int)(mImageBYScale * point.getY());
     		g2d.drawOval(x-BASE_CIRCLE_DIAMETER/2,y-BASE_CIRCLE_DIAMETER/2,BASE_CIRCLE_DIAMETER,BASE_CIRCLE_DIAMETER);
-		SURFInterestPoint target = mBMatchingPoints.get(point);
-		int tx = (int)(mImageAXScale * target.getX());
+    		
+    		SURFInterestPoint target = mBMatchingPoints.get(point);
+    		int tx = (int)(mImageAXScale * target.getX());
     		int ty = (int)(mImageAYScale * target.getY());
-		g2d.drawOval(tx-TARGET_CIRCLE_DIAMETER/2,ty-TARGET_CIRCLE_DIAMETER/2,TARGET_CIRCLE_DIAMETER,TARGET_CIRCLE_DIAMETER);
-		g2d.drawLine(x,y,tx,ty);
+    		
+    		g2d.drawOval(tx-TARGET_CIRCLE_DIAMETER/2,ty-TARGET_CIRCLE_DIAMETER/2,TARGET_CIRCLE_DIAMETER,TARGET_CIRCLE_DIAMETER);
+    		g2d.drawLine(x,y,tx,ty);
     	}
     }
 
@@ -194,6 +198,27 @@ public class SurfCompare extends JPanel {
       System.out.println("There are: " + pointsB.size() + " matching points of " + mSurfB.getUprightInterestPoints().size());
     }
     
+    public boolean sonElMismoRostro(){
+    	 int pointsACoincidenConB = mSurfA.getMatchingPoints(mSurfB,true).size();
+    	 int pointsBCoincidenConA = mSurfB.getMatchingPoints(mSurfA,true).size();
+         
+         float totalPointsA = (float) mSurfA.getUprightInterestPoints().size();
+         float totalPointsB = (float) mSurfB.getUprightInterestPoints().size();
+         
+         float aciertoA = pointsACoincidenConB/totalPointsA;
+         float aciertoB = pointsBCoincidenConA/totalPointsB;
+         
+         float acierto = (aciertoA + aciertoB)/2;
+         
+         System.out.println("Acierto -> "+acierto+", con ptos para A de "+totalPointsA+", cont ptos para B de "+totalPointsB);
+         
+         if(totalPointsA > 60 && totalPointsB > 60 && acierto>0.4){
+        	 return true;
+         }
+         return false;
+
+    }
+    
     public static void main(String[] args) throws IOException {
 
 //        System.out.println(imageA);
@@ -201,6 +226,6 @@ public class SurfCompare extends JPanel {
     	SurfCompare show = new SurfCompare();
     	show.getNumPointsAB("img/ADRIAN/img1.jpg","img/ADRIAN/img3.jpg");
         show.display();
-        //show.matchesInfo();
+        show.matchesInfo();
     }
 }

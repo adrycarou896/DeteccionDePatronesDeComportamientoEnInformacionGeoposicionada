@@ -13,7 +13,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
 
 import QR.Read_QR;
-import reconocimientoSIFT.ReconocimientoFacial;
+import reconocimiento.ReconocimientoFacial;
 
 public class Reader implements Runnable{
 	

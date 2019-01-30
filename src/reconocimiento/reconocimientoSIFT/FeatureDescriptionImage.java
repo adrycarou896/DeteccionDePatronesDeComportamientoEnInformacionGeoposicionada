@@ -1,4 +1,4 @@
-package reconocimientoSIFT;
+package reconocimiento.reconocimientoSIFT;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package reconocimientoSIFT.m;
+package reconocimiento.reconocimientoSIFT.m;
 
 import com.sun.javafx.*;
 

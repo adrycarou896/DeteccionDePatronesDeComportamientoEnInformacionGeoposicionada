@@ -1,4 +1,4 @@
-package reconocimientoSIFT;
+package reconocimiento.reconocimientoSIFT;
 
 //import org.opencv.features2d.KeyPoint;
 import org.opencv.core.KeyPoint;

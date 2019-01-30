@@ -1,10 +1,9 @@
-package reconocimientoSIFT;
+package reconocimiento;
 
 import static org.opencv.objdetect.Objdetect.CASCADE_SCALE_IMAGE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 //import static org.bytedeco.javacpp.opencv_core.IplImage;
 import org.opencv.core.Mat;
@@ -15,9 +14,12 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
-import personas.Person;
-import reconocimientoSURF.SURFInterestPoint;
-import reconocimientoSURF.SurfCompare;
+import personas.PersonSIFT;
+import personas.PersonSURF;
+import reconocimiento.reconocimientoSIFT.FeatureDescriptionImage;
+import reconocimiento.reconocimientoSIFT.FeatureExtractionImage;
+import reconocimiento.reconocimientoSIFT.FeatureExtractionImage2;
+import reconocimiento.reconocimientoSURF.SurfCompare;
 
 public class ReconocimientoFacial {
 	 
@@ -29,21 +31,23 @@ public class ReconocimientoFacial {
     
     int highConfidenceLevel = 70;
     
-    private List<Person> persons;
+    private List<PersonSIFT> personsSIFT;
     
     private SurfCompare surfCompare;
+    private List<PersonSURF> personsSURF;
     
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
     	this.facesArray = new ArrayList<Rect>();
 
-    	this.persons = new ArrayList<Person>();
+    	this.personsSIFT = new ArrayList<PersonSIFT>();
     	
     	this.surfCompare = new SurfCompare();
+    	this.personsSURF = new ArrayList<PersonSURF>();
     }
     
-	public void reconocer(Mat frame, Mat frame_gray) throws Exception{
+	public void reconocerConSIFT(Mat frame, Mat frame_gray) throws Exception{
 		
 		Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro
         Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
@@ -73,7 +77,7 @@ public class ReconocimientoFacial {
     		
     		FeatureExtractionImage feaExtImgActual = new FeatureExtractionImage2(rutaImagen);
     		boolean coincideConPersona = false;
-    		for (Person person : this.persons) {
+    		for (PersonSIFT person : this.personsSIFT) {
     			List<FeatureExtractionImage> featureExtractionImageLista = person.getFeatureExtractionImageLista();
     			for (FeatureExtractionImage featureExtractionImage : featureExtractionImageLista) {
     				boolean mismaPersona = new FeatureDescriptionImage(featureExtractionImage, feaExtImgActual).describeFeature();
@@ -86,10 +90,10 @@ public class ReconocimientoFacial {
     			}
 			}
     		if(!coincideConPersona){
-    			Person person = new Person("persona"+this.persons.size());
+    			PersonSIFT person = new PersonSIFT("persona"+this.personsSIFT.size());
     			person.addFeatureExtractionImage(rutaImagen, frame);
-    			this.persons.add(person);
-    			System.out.println("No ha encontrado una nueva persona");
+    			this.personsSIFT.add(person);
+    			System.out.println("Se ha encontrado una nueva persona");
     		}
     		
         } 
@@ -112,22 +116,37 @@ public class ReconocimientoFacial {
         for (Rect rostro : rostrosLista) {
         	facesArray.add(rostro);
     
-    		String nombre = "persona"+facesArray.size();
-        	String rutaImagen = "img/surf/"+nombre+".jpg";
-    		//String rutaImagen = "img/"+"persona"+".jpg";
+    		//String nombre = "persona"+facesArray.size();
+        	//String rutaImagen = "img/surf/"+nombre+".jpg";
+    		String rutaImagenActual = "img/"+"persona"+".jpg";
     	    
     		//Se recorta la imagen
     		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
     		frame = new Mat(frame,rectCrop);
     		//
     		//Se guarda la imagen
-    		Imgcodecs.imwrite(rutaImagen, frame);
+    		Imgcodecs.imwrite(rutaImagenActual, frame);
     		
-    		if(facesArray.size()>1){
-    			String rutaAnterior = "img/surf/"+"persona"+(facesArray.size()-1)+".jpg";
-    			surfCompare.getNumPointsAB(rutaImagen, rutaAnterior);
-    		}
-    		
+			boolean coincideConPersona = false;
+			for (PersonSURF person : this.personsSURF) {
+				List<String> imagenes = person.getImagenes();
+				for (String imagen : imagenes) {
+					surfCompare.getNumPointsAB(rutaImagenActual, imagen);
+	    			boolean mismaPersona = surfCompare.sonElMismoRostro();
+	    			if(mismaPersona){
+	    				coincideConPersona = true;
+	    				person.addImagen(rutaImagenActual, frame);
+	    				System.out.println("ESTA PERSONA ES -> "+person.getNombre());
+	    				break;
+	    			}
+				}
+			}
+			if(!coincideConPersona){
+				PersonSURF person = new PersonSURF("persona"+this.personsSURF.size());
+				person.addImagen(rutaImagenActual, frame);
+				this.personsSURF.add(person);
+				System.out.println("Se ha encontrado una nueva persona");
+			}
     		
         } 
 	}
