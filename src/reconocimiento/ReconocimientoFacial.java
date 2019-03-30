@@ -14,6 +14,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
+import gui.Entrenar;
 import personas.PersonSIFT;
 import personas.PersonSURF;
 import reconocimiento.reconocimientoSIFT.FeatureDescriptionImage;
@@ -36,6 +37,8 @@ public class ReconocimientoFacial {
     private SurfCompare surfCompare;
     private List<PersonSURF> personsSURF;
     
+    private Entrenar entrenamiento;
+    
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
@@ -47,6 +50,43 @@ public class ReconocimientoFacial {
     	this.personsSURF = new ArrayList<PersonSURF>();
     }
     
+    public ReconocimientoFacial(Entrenar entrenamiento){
+    	this.entrenamiento = entrenamiento;
+    }
+    
+    public void reconocer(Mat frame, Mat frame_gray) throws Exception{
+		
+		Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro
+        Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
+        double w = frame.width();
+        double h = frame.height();
+        //El 1.1 -> factor de escala de reducci�n de imagen (cuanto m�s grande menos preciso va a ser)
+        //new Size(30, 30) -> tama�o minimo de caras a detectar
+        //new Size(w, h) -> tama�o m�ximo de caras a detectar
+        Cascade.detectMultiScale(frame_gray, rostros, 1.1, 2, 0|CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h));
+        Rect[] rostrosLista = rostros.toArray();
+        
+        Rect rectCrop = new Rect();
+		
+        for (Rect rostro : rostrosLista) {
+        	facesArray.add(rostro);
+    
+    		//String nombre = "persona"+facesArray.size();
+        	//String rutaImagen = "img/"+nombre+".jpg";
+    		String rutaImagen = "img/"+"persona"+".jpg";
+    	    
+    		//Se recorta la imagen
+    		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
+    		frame = new Mat(frame,rectCrop);
+    		//
+    		//Se guarda la imagen
+    		Imgcodecs.imwrite(rutaImagen, frame);
+    		
+    		this.entrenamiento.test(rutaImagen);
+    		
+        } 
+    }
+        
 	public void reconocerConSIFT(Mat frame, Mat frame_gray) throws Exception{
 		
 		Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro

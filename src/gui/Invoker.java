@@ -1,7 +1,8 @@
 package gui;
 
 public class Invoker {
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
+		/*
 		System.load("C:\\opencv\\build\\java\\x64\\opencv_java400.dll");
 		
     	Recorder recorder = new Recorder();
@@ -10,7 +11,16 @@ public class Invoker {
     	Reader reader = new Reader();
     	Thread thReader = new Thread(reader);
         
-        thReader.run();
+        thReader.run();*/
     	//thRecorder.run();
+		
+		Entrenar entrenamiento = new Entrenar();
+		entrenamiento.run();
+		
+		Reader reader = new Reader(entrenamiento);
+		reader.run();
+		
     }
+	
+	
 }

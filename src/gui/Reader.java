@@ -1,11 +1,8 @@
 package gui;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.opencv.core.*;
-//import org.bytedeco.javacpp.opencv_core.*;
+import org.opencv.core.Core;
+import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
 
@@ -16,13 +13,13 @@ import QR.Read_QR;
 import reconocimiento.ReconocimientoFacial;
 
 public class Reader implements Runnable{
-	
+
 	private Read_QR qr;
     private ReconocimientoFacial reconocimientoFacial;
     
-	public Reader(){
+	public Reader(Entrenar entrenamiento){
 		this.qr = new Read_QR();
-		this.reconocimientoFacial = new ReconocimientoFacial();
+		this.reconocimientoFacial = new ReconocimientoFacial(entrenamiento);
 	}
 	
 	@Override
@@ -39,7 +36,13 @@ public class Reader implements Runnable{
 			Mat frame_gray = new Mat();
 			while(true){
 				if(camera.read(frame)){
-					String filePath = "img/camera.jpg";
+					
+					try {
+						this.reconocimientoFacial.reconocer(frame, frame_gray);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					/*String filePath = "img/camera.jpg";
 					Imgcodecs.imwrite(filePath, frame);
 					try {
 						qr.reconocer(filePath);
@@ -50,10 +53,11 @@ public class Reader implements Runnable{
 						}
 					} catch (NotFoundException | WriterException | IOException e) {
 						e.printStackTrace();
-					}
+					}*/
 				}
 			}
 		}
 		camera.release();
+		
 	}
 }
