@@ -14,7 +14,6 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
-//import static org.bytedeco.javacpp.opencv_core.IplImage;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;

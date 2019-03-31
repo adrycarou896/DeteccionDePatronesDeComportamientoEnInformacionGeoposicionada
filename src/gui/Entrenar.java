@@ -90,8 +90,11 @@ public class Entrenar implements Runnable{
 		 faceRecognizer.predict(testImageMat, enteros, confidences);
 		
 	     String nombreUsuario = "usuario"+enteros[0];
-	     System.out.println("El usuario que aparece en la imagen "+testImage+" es el usuario "+nombreUsuario);
-	     System.out.println("        *Confidencia: "+confidences[0]);
+	     if(confidences[0]<3000){
+	    	 System.out.println("El usuario que aparece en la imagen "+testImage+" es el usuario "+nombreUsuario);
+	  	     System.out.println("        *Confidencia: "+confidences[0]);
+	     }
+	  
 	}
 	
 }

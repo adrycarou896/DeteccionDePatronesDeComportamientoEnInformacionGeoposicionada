@@ -42,6 +42,7 @@ public class Reader implements Runnable{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+					//Imgcodecs.imwrite("img/prueba/camera"+cont+".jpg", frame);
 					/*String filePath = "img/camera.jpg";
 					Imgcodecs.imwrite(filePath, frame);
 					try {
