@@ -2,8 +2,17 @@ package reconocimiento;
 
 import static org.opencv.objdetect.Objdetect.CASCADE_SCALE_IMAGE;
 
+import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 //import static org.bytedeco.javacpp.opencv_core.IplImage;
 import org.opencv.core.Mat;
@@ -51,6 +60,9 @@ public class ReconocimientoFacial {
     }
     
     public ReconocimientoFacial(Entrenar entrenamiento){
+    	this.Cascade = new CascadeClassifier(RutaDelCascade);
+    	this.rostros = new MatOfRect();
+    	
     	this.entrenamiento = entrenamiento;
     }
     
@@ -60,32 +72,44 @@ public class ReconocimientoFacial {
         Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
         double w = frame.width();
         double h = frame.height();
-        //El 1.1 -> factor de escala de reducci�n de imagen (cuanto m�s grande menos preciso va a ser)
-        //new Size(30, 30) -> tama�o minimo de caras a detectar
-        //new Size(w, h) -> tama�o m�ximo de caras a detectar
+        
         Cascade.detectMultiScale(frame_gray, rostros, 1.1, 2, 0|CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h));
         Rect[] rostrosLista = rostros.toArray();
         
         Rect rectCrop = new Rect();
 		
         for (Rect rostro : rostrosLista) {
-        	facesArray.add(rostro);
-    
-    		//String nombre = "persona"+facesArray.size();
-        	//String rutaImagen = "img/"+nombre+".jpg";
-    		String rutaImagen = "img/"+"persona"+".jpg";
+        	
+    		String rutaImagen = "img/persona.jpg";
     	    
     		//Se recorta la imagen
     		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
     		frame = new Mat(frame,rectCrop);
-    		//
+    		
     		//Se guarda la imagen
     		Imgcodecs.imwrite(rutaImagen, frame);
     		
-    		this.entrenamiento.test(rutaImagen);
+    		InputStream input = new FileInputStream(rutaImagen);
+    		String srcSalida="img/test.jpg";
+			OutputStream output = new FileOutputStream(srcSalida);
+			resize(input, output, 607, 607);
+			
+    		this.entrenamiento.test(srcSalida);
     		
         } 
     }
+    
+	public static void resize(InputStream input, OutputStream output, int width, int height) throws Exception {
+	    BufferedImage src = ImageIO.read(input);
+	    BufferedImage dest = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	    Graphics2D g = dest.createGraphics();
+	    AffineTransform at = AffineTransform.getScaleInstance
+	    		((double)width / src.getWidth(), 
+	    				(double)height / src.getHeight());
+	    g.drawRenderedImage(src, at);
+	    ImageIO.write(dest, "JPG", output);
+	    output.close();
+	}
         
 	public void reconocerConSIFT(Mat frame, Mat frame_gray) throws Exception{
 		

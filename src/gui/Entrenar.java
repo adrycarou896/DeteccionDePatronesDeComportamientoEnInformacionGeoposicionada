@@ -39,7 +39,7 @@ public class Entrenar implements Runnable{
 		train(trainingDirs);
 	}
 	
-	public void train(String [] trainingDirs) { 
+	public void train(String[] trainingDirs) { 
 
 		FilenameFilter imgFilter = new FilenameFilter() { 
 			public boolean accept(File dir, String name) { 
