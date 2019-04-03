@@ -40,7 +40,7 @@ public class Reader implements Runnable{
 					try {
 						this.reconocimientoFacial.reconocer(frame, frame_gray);
 					} catch (Exception e) {
-						e.printStackTrace();
+						//e.printStackTrace();
 					}
 					//Imgcodecs.imwrite("img/prueba/camera"+cont+".jpg", frame);
 					/*String filePath = "img/camera.jpg";

@@ -10,6 +10,7 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.util.Pair;
 import org.bytedeco.javacpp.opencv_core.Mat;
 import org.bytedeco.javacpp.opencv_core.MatVector;
 import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
@@ -21,7 +22,7 @@ public class Entrenar implements Runnable{
 	
 	private FaceRecognizer faceRecognizer;
 	
-	private static final int NUMERO_DE_USUARIOS = 2;
+	private static final int NUMERO_DE_USUARIOS = 3;
 	
 	public Entrenar() {
 		this.faceRecognizer = FisherFaceRecognizer.create();
@@ -81,7 +82,7 @@ public class Entrenar implements Runnable{
         
     } 
 	
-	public void test(String testImage){
+	public Pair<String, Double> test(String testImage){
 		
 		 Mat testImageMat = imread(testImage, IMREAD_GRAYSCALE); 
 		
@@ -90,11 +91,12 @@ public class Entrenar implements Runnable{
 		 faceRecognizer.predict(testImageMat, enteros, confidences);
 		
 	     String nombreUsuario = "usuario"+enteros[0];
-	     if(confidences[0]<3000){
-	    	 System.out.println("El usuario que aparece en la imagen "+testImage+" es el usuario "+nombreUsuario);
-	  	     System.out.println("        *Confidencia: "+confidences[0]);
+	     if(confidences[0]<600){
+	    	 //System.out.println("El usuario que aparece en la imagen "+testImage+" es el usuario "+nombreUsuario);
+	  	     //System.out.println("        *Confidencia: "+confidences[0]);
+	  	     return new Pair<String,Double>(nombreUsuario, confidences[0]);
 	     }
-	  
+	     return null;
 	}
 	
 }

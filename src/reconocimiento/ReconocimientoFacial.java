@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.math3.util.Pair;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.core.Rect;
@@ -46,7 +47,9 @@ public class ReconocimientoFacial {
     private List<PersonSURF> personsSURF;
     
     private Entrenar entrenamiento;
+    private List<String> persons;
     
+    private int cont = 95;
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
@@ -63,6 +66,7 @@ public class ReconocimientoFacial {
     	this.rostros = new MatOfRect();
     	
     	this.entrenamiento = entrenamiento;
+    	this.persons = new ArrayList<String>();
     }
     
     public void reconocer(Mat frame, Mat frame_gray) throws Exception{
@@ -78,7 +82,6 @@ public class ReconocimientoFacial {
         Rect rectCrop = new Rect();
 		
         for (Rect rostro : rostrosLista) {
-        	
     		String rutaImagen = "img/persona.jpg";
     	    
     		//Se recorta la imagen
@@ -93,7 +96,20 @@ public class ReconocimientoFacial {
 			OutputStream output = new FileOutputStream(srcSalida);
 			resize(input, output, 607, 607);
 			
-    		this.entrenamiento.test(srcSalida);
+			/*input = new FileInputStream(srcSalida);
+			output = new FileOutputStream("img/usuario0/img"+cont+".jpg");
+			resize(input, output, 607, 607);
+			cont++;*/
+			
+    		Pair<String, Double> person = this.entrenamiento.test(srcSalida);
+    		if(person!=null){
+    			String nombre = person.getFirst();
+    			if(!this.persons.contains(nombre)){
+    				this.persons.add(nombre);
+    				 System.out.println("El usuario que aparece en camara es el " + nombre);
+    		  	     System.out.println("        *Confidencia: "+person.getSecond());
+    			}
+    		}
     		
         } 
     }
