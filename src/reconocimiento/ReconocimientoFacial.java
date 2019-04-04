@@ -50,6 +50,13 @@ public class ReconocimientoFacial {
     private List<String> persons;
     
     private int cont = 95;
+    
+    private int contUsuario0 = 0;
+    private long timeInicial=0;
+    private long timeFinal=0;
+    private boolean entroEnClase = true;
+    private int numVecesNoAparecenRostros = 0;
+    
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
@@ -81,7 +88,10 @@ public class ReconocimientoFacial {
         
         Rect rectCrop = new Rect();
 		
+        boolean hayRostros = false;
         for (Rect rostro : rostrosLista) {
+        	hayRostros = true;
+        	
     		String rutaImagen = "img/persona.jpg";
     	    
     		//Se recorta la imagen
@@ -109,9 +119,32 @@ public class ReconocimientoFacial {
     				 System.out.println("El usuario que aparece en camara es el " + nombre);
     		  	     System.out.println("        *Confidencia: "+person.getSecond());
     			}
+    			else if(!entroEnClase){
+    				timeFinal=System.currentTimeMillis();
+    	        	double time = (double)((timeFinal - timeInicial)/1000);
+    	        	System.out.println("Time->"+time+" segundos = "+(timeFinal - timeInicial)+" milisegundos");
+    	        	entroEnClase=true;
+    	        	System.out.println("Entra en clase");
+    			}
+    		}
+    		else{
+    			numVecesNoAparecenRostros++;
     		}
     		
         } 
+        
+        if(!hayRostros){
+        	numVecesNoAparecenRostros++;
+        }
+        else{
+        	numVecesNoAparecenRostros=0;
+        }
+        
+        if(!hayRostros && this.persons.size()>0 && numVecesNoAparecenRostros==15 && entroEnClase){
+        	System.out.println("Sale de clase");
+        	entroEnClase = false;
+        	timeInicial=System.currentTimeMillis();
+        }
     }
     
 	public static void resize(InputStream input, OutputStream output, int width, int height) throws Exception {
