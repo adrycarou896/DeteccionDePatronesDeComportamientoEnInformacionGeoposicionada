@@ -24,11 +24,8 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 import gui.Entrenar;
-import personas.PersonSIFT;
+import personas.Person;
 import personas.PersonSURF;
-import reconocimiento.reconocimientoSIFT.FeatureDescriptionImage;
-import reconocimiento.reconocimientoSIFT.FeatureExtractionImage;
-import reconocimiento.reconocimientoSIFT.FeatureExtractionImage2;
 import reconocimiento.reconocimientoSURF.SurfCompare;
 
 public class ReconocimientoFacial {
@@ -41,28 +38,24 @@ public class ReconocimientoFacial {
     
     int highConfidenceLevel = 70;
     
-    private List<PersonSIFT> personsSIFT;
-    
     private SurfCompare surfCompare;
     private List<PersonSURF> personsSURF;
     
     private Entrenar entrenamiento;
-    private List<String> persons;
+    private List<Person> persons;
     
     private int cont = 95;
     
     private int contUsuario0 = 0;
     private long timeInicial=0;
     private long timeFinal=0;
-    private boolean entroEnClase = true;
+    private boolean entroEnClase = false;
     private int numVecesNoAparecenRostros = 0;
     
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
     	this.rostros = new MatOfRect();
     	this.facesArray = new ArrayList<Rect>();
-
-    	this.personsSIFT = new ArrayList<PersonSIFT>();
     	
     	this.surfCompare = new SurfCompare();
     	this.personsSURF = new ArrayList<PersonSURF>();
@@ -73,7 +66,7 @@ public class ReconocimientoFacial {
     	this.rostros = new MatOfRect();
     	
     	this.entrenamiento = entrenamiento;
-    	this.persons = new ArrayList<String>();
+    	this.persons = new ArrayList<Person>();
     }
     
     public void reconocer(Mat frame, Mat frame_gray) throws Exception{
@@ -94,6 +87,10 @@ public class ReconocimientoFacial {
         	
     		String rutaImagen = "img/persona.jpg";
     	    
+    		System.out.println("width->"+rostro.width);
+    		System.out.println("height->"+rostro.height);
+    		System.out.println("x->"+rostro.x);
+    		System.out.println("y->"+rostro.y);
     		//Se recorta la imagen
     		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
     		frame = new Mat(frame,rectCrop);
@@ -111,20 +108,20 @@ public class ReconocimientoFacial {
 			resize(input, output, 607, 607);
 			cont++;*/
 			
-    		Pair<String, Double> person = this.entrenamiento.test(srcSalida);
-    		if(person!=null){
-    			String nombre = person.getFirst();
-    			if(!this.persons.contains(nombre)){
-    				this.persons.add(nombre);
-    				 System.out.println("El usuario que aparece en camara es el " + nombre);
-    		  	     System.out.println("        *Confidencia: "+person.getSecond());
+    		Pair<Person, Double> personPair = this.entrenamiento.test(srcSalida);
+    		if(personPair!=null){
+    			Person person = personPair.getFirst();
+    			if(!this.persons.contains(person)){
+    				this.persons.add(person);
+    				 System.out.println("El usuario que aparece en camara es el " + person.getNombre());
+    		  	     System.out.println("        *Confidencia: "+personPair.getSecond());
     			}
-    			else if(!entroEnClase){
+    			else if(entroEnClase){
     				timeFinal=System.currentTimeMillis();
     	        	double time = (double)((timeFinal - timeInicial)/1000);
     	        	System.out.println("Time->"+time+" segundos = "+(timeFinal - timeInicial)+" milisegundos");
-    	        	entroEnClase=true;
-    	        	System.out.println("Entra en clase");
+    	        	entroEnClase=false;
+    	        	System.out.println("Sale clase");
     			}
     		}
     		else{
@@ -140,9 +137,9 @@ public class ReconocimientoFacial {
         	numVecesNoAparecenRostros=0;
         }
         
-        if(!hayRostros && this.persons.size()>0 && numVecesNoAparecenRostros==15 && entroEnClase){
-        	System.out.println("Sale de clase");
-        	entroEnClase = false;
+        if(!hayRostros && this.persons.size()>0 && numVecesNoAparecenRostros==15 && !entroEnClase){
+        	System.out.println("Entra en clase");
+        	entroEnClase = true;
         	timeInicial=System.currentTimeMillis();
         }
     }
@@ -157,58 +154,6 @@ public class ReconocimientoFacial {
 	    g.drawRenderedImage(src, at);
 	    ImageIO.write(dest, "JPG", output);
 	    output.close();
-	}
-        
-	public void reconocerConSIFT(Mat frame, Mat frame_gray) throws Exception{
-		
-		Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro
-        Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
-        double w = frame.width();
-        double h = frame.height();
-        //El 1.1 -> factor de escala de reducci�n de imagen (cuanto m�s grande menos preciso va a ser)
-        //new Size(30, 30) -> tama�o minimo de caras a detectar
-        //new Size(w, h) -> tama�o m�ximo de caras a detectar
-        Cascade.detectMultiScale(frame_gray, rostros, 1.1, 2, 0|CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h));
-        Rect[] rostrosLista = rostros.toArray();
-        
-        Rect rectCrop = new Rect();
-		
-        for (Rect rostro : rostrosLista) {
-        	facesArray.add(rostro);
-    
-    		//String nombre = "persona"+facesArray.size();
-        	//String rutaImagen = "img/"+nombre+".jpg";
-    		String rutaImagen = "img/"+"persona"+".jpg";
-    	    
-    		//Se recorta la imagen
-    		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
-    		frame = new Mat(frame,rectCrop);
-    		//
-    		//Se guarda la imagen
-    		Imgcodecs.imwrite(rutaImagen, frame);
-    		
-    		FeatureExtractionImage feaExtImgActual = new FeatureExtractionImage2(rutaImagen);
-    		boolean coincideConPersona = false;
-    		for (PersonSIFT person : this.personsSIFT) {
-    			List<FeatureExtractionImage> featureExtractionImageLista = person.getFeatureExtractionImageLista();
-    			for (FeatureExtractionImage featureExtractionImage : featureExtractionImageLista) {
-    				boolean mismaPersona = new FeatureDescriptionImage(featureExtractionImage, feaExtImgActual).describeFeature();
-        			if(mismaPersona){
-        				person.addFeatureExtractionImage(rutaImagen, frame);
-        				coincideConPersona = true;
-        				System.out.println("ESTA PERSONA ES -> "+person.getNombre());
-        				break;
-        			}
-    			}
-			}
-    		if(!coincideConPersona){
-    			PersonSIFT person = new PersonSIFT("persona"+this.personsSIFT.size());
-    			person.addFeatureExtractionImage(rutaImagen, frame);
-    			this.personsSIFT.add(person);
-    			System.out.println("Se ha encontrado una nueva persona");
-    		}
-    		
-        } 
 	}
 	
 	public void reconocerConSURF(Mat frame, Mat frame_gray) throws Exception{

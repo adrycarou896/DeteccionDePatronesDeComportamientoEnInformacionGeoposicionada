@@ -32,20 +32,11 @@
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacpp.jar"/>
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv-windows-x86.jar"/>
 	<classpathentry kind="lib" path="lib/reconocmientoFacial/javacv.jar"/>
-	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-400.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/opencv/build/java/x64"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="lib/jar_files/opencv-4.0.1-1.4.4.jar"/>
 	<classpathentry kind="lib" path="lib/jar_files/videoinput-0.200-1.4.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Packard/Desktop/TFG/DeteccionDePatronesDeComportamientoEnInformacionGeoposicionada/lib/reconocmientoFacial/commons-math3-3.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-2.4.13-0.jar">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/opencv/build/java/x64"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/adeka/Desktop/TFG/DeteccionDePatronesDeComportamientoEnInformacionGeoposicionada/lib/reconocmientoFacial/commons-math3-3.6.1.jar"/>
 	<classpathentry kind="lib" path="lib/surf/junit/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="lib/surf/commons-collections4-4.2.jar"/>
+	<classpathentry kind="lib" path="C:/opencv/build/java/opencv-400.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

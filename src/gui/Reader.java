@@ -24,6 +24,7 @@ public class Reader implements Runnable{
 	
 	@Override
 	public void run() {
+		//System.setProperty("java.library.path", "C:/opencv/build/java/x64");
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		
 		VideoCapture camera=new VideoCapture(0);
