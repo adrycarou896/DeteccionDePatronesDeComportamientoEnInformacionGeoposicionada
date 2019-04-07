@@ -25,6 +25,7 @@ public class Invoker {
         thReader.run();*/
     	//thRecorder.run();
 		
+		//System.out.println(System.getProperty("java.library.path"));
 		System.load("C:\\opencv\\build\\java\\x64\\opencv_java400.dll");
 		
 		Entrenar entrenamiento = new Entrenar();
