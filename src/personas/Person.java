@@ -4,12 +4,14 @@ public class Person {
 	
 	private int label;
 	private String nombre;
-	private boolean detectado = false;
-	private long ultimaDate = 0;
-	private boolean estaEnClase = false;
+	private boolean detectado = true;
+	private long ultimaVezDetectado = 0;
+	private boolean enClase = false;
+	private int numVecesNoApareceRostro = 0;
 	
-	public Person(int label) {
+	public Person(int label, long ultimaVezDetectado) {
 		this.label = label;
+		this.ultimaVezDetectado = ultimaVezDetectado;
 		this.nombre = "usuario"+label; 
 	}
 
@@ -37,20 +39,28 @@ public class Person {
 		this.detectado = detectado;
 	}
 
-	public long getUltimaDate() {
-		return ultimaDate;
+	public long getUltimaVezDetectado() {
+		return ultimaVezDetectado;
 	}
 
-	public void setUltimaDate(long ultimaDate) {
-		this.ultimaDate = ultimaDate;
+	public void setUltimaVezDetectado(long ultimaDate) {
+		this.ultimaVezDetectado = ultimaDate;
 	}
 
-	public boolean isEstaEnClase() {
-		return estaEnClase;
+	public boolean isEnClase() {
+		return enClase;
 	}
 
-	public void setEstaEnClase(boolean estaEnClase) {
-		this.estaEnClase = estaEnClase;
+	public void setEnClase(boolean enClase) {
+		this.enClase = enClase;
+	}
+
+	public int getNumVecesNoApareceRostro() {
+		return numVecesNoApareceRostro;
+	}
+
+	public void setNumVecesNoApareceRostro(int numVecesNoApareceRostro) {
+		this.numVecesNoApareceRostro = numVecesNoApareceRostro;
 	}
 	
 	

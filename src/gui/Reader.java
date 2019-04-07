@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.File;
 import java.io.IOException;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -61,5 +62,34 @@ public class Reader implements Runnable{
 		}
 		camera.release();
 		
+	}
+	
+	public void capturePerson(int numUsuarios){
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		int contImg = 1;
+		VideoCapture camera=new VideoCapture(0);
+        
+		File directorio=new File("img/usuario"+numUsuarios); 
+		directorio.mkdir(); 
+		
+		if(!camera.isOpened()){
+			System.out.println("Error");
+		}
+		else{
+			Mat frame = new Mat();
+			Mat frame_gray = new Mat();
+			while(true){
+				if(camera.read(frame)){
+					try {
+						String rutaImagen=directorio.getPath()+"/img"+contImg+".jpg";
+						this.reconocimientoFacial.saveFaceOfPerson(frame, frame_gray, rutaImagen);
+						contImg++;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		camera.release();
 	}
 }

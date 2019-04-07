@@ -17,13 +17,12 @@ import org.bytedeco.javacpp.opencv_face.FaceRecognizer;
 import org.bytedeco.javacpp.opencv_face.FisherFaceRecognizer;
 
 import entidades.ImageSample;
-import personas.Person;
 
 public class Entrenar implements Runnable{
 	
 	private FaceRecognizer faceRecognizer;
 	
-	private static final int NUMERO_DE_USUARIOS = 3;
+	public static final int NUMERO_DE_USUARIOS = 4;
 	
 	public Entrenar() {
 		this.faceRecognizer = FisherFaceRecognizer.create();
@@ -83,7 +82,7 @@ public class Entrenar implements Runnable{
         
     } 
 	
-	public Pair<Person, Double> test(String testImage){
+	public Pair<Integer, Double> test(String testImage){
 		
 		 Mat testImageMat = imread(testImage, IMREAD_GRAYSCALE); 
 		
@@ -91,10 +90,10 @@ public class Entrenar implements Runnable{
          double[] confidences = new double[1];
 		 faceRecognizer.predict(testImageMat, enteros, confidences);
 		
-	     if(confidences[0]<600){
+	     if(confidences[0]<425){
 	    	 //System.out.println("El usuario que aparece en la imagen "+testImage+" es el usuario "+nombreUsuario);
 	  	     //System.out.println("        *Confidencia: "+confidences[0]);
-	  	     return new Pair<Person,Double>(new Person(enteros[0]), confidences[0]);
+	  	     return new Pair<Integer,Double>(enteros[0], confidences[0]);
 	     }
 	     return null;
 	}

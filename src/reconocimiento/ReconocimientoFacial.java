@@ -46,11 +46,6 @@ public class ReconocimientoFacial {
     
     private int cont = 95;
     
-    private int contUsuario0 = 0;
-    private long timeInicial=0;
-    private long timeFinal=0;
-    private boolean entroEnClase = false;
-    private int numVecesNoAparecenRostros = 0;
     
     public ReconocimientoFacial(){
     	this.Cascade = new CascadeClassifier(RutaDelCascade);
@@ -69,6 +64,34 @@ public class ReconocimientoFacial {
     	this.persons = new ArrayList<Person>();
     }
     
+    public void saveFaceOfPerson(Mat frame, Mat frame_gray,String rutaImagenNueva)throws Exception{
+    	Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro
+        Imgproc.equalizeHist(frame_gray, frame_gray);//Valanzeamos los tonos grises
+        double w = frame.width();
+        double h = frame.height();
+        
+        Cascade.detectMultiScale(frame_gray, rostros, 1.1, 2, 0|CASCADE_SCALE_IMAGE, new Size(30, 30), new Size(w, h));
+        Rect[] rostrosLista = rostros.toArray();
+        
+        Rect rectCrop = new Rect();
+
+        for (Rect rostro : rostrosLista) {
+    		String rutaImagen = "img/persona.jpg";
+    	    
+    		//Se recorta la imagen
+    		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
+    		frame = new Mat(frame,rectCrop);
+    		
+    		//Se guarda la imagen
+    		Imgcodecs.imwrite(rutaImagen, frame);
+    		
+    		InputStream input = new FileInputStream(rutaImagen);
+    		String srcSalida=rutaImagenNueva;
+			OutputStream output = new FileOutputStream(srcSalida);
+			resize(input, output, 607, 607);
+        }
+    }
+    
     public void reconocer(Mat frame, Mat frame_gray) throws Exception{
 		
 		Imgproc.cvtColor(frame, frame_gray, Imgproc.COLOR_BGR2GRAY);//Colvierte la imagene a color a blanco y negro
@@ -80,17 +103,10 @@ public class ReconocimientoFacial {
         Rect[] rostrosLista = rostros.toArray();
         
         Rect rectCrop = new Rect();
-		
-        boolean hayRostros = false;
+
         for (Rect rostro : rostrosLista) {
-        	hayRostros = true;
-        	
     		String rutaImagen = "img/persona.jpg";
     	    
-    		System.out.println("width->"+rostro.width);
-    		System.out.println("height->"+rostro.height);
-    		System.out.println("x->"+rostro.x);
-    		System.out.println("y->"+rostro.y);
     		//Se recorta la imagen
     		rectCrop = new Rect(rostro.x, rostro.y, rostro.width, rostro.height); 
     		frame = new Mat(frame,rectCrop);
@@ -108,40 +124,53 @@ public class ReconocimientoFacial {
 			resize(input, output, 607, 607);
 			cont++;*/
 			
-    		Pair<Person, Double> personPair = this.entrenamiento.test(srcSalida);
+    		Pair<Integer, Double> personPair = this.entrenamiento.test(srcSalida);
     		if(personPair!=null){
-    			Person person = personPair.getFirst();
-    			if(!this.persons.contains(person)){
+    			int personLabel = personPair.getFirst();
+    			Person person = getPerson(personLabel);
+    			if(person==null){
+    				person = new Person(personLabel, System.currentTimeMillis());
     				this.persons.add(person);
-    				 System.out.println("El usuario que aparece en camara es el " + person.getNombre());
-    		  	     System.out.println("        *Confidencia: "+personPair.getSecond());
+    				System.out.println("El usuario que aparece en camara es el " + person.getNombre());
+    		  	    System.out.println("        *Confidencia: "+personPair.getSecond());
     			}
-    			else if(entroEnClase){
-    				timeFinal=System.currentTimeMillis();
-    	        	double time = (double)((timeFinal - timeInicial)/1000);
-    	        	System.out.println("Time->"+time+" segundos = "+(timeFinal - timeInicial)+" milisegundos");
-    	        	entroEnClase=false;
+    			else if(!person.isEnClase()){//Si existe ya la persona y la detecta fuera de clase
+    				long ultimaVezDetectado = System.currentTimeMillis();
+    				person.setUltimaVezDetectado(ultimaVezDetectado);
+    			}
+    			else if(person.isEnClase()){
+    				double momentoDeLaDeteccion=System.currentTimeMillis();
+    	        	double tiempoTranscurrido = (double)((momentoDeLaDeteccion - person.getUltimaVezDetectado())/1000);
+    	        	System.out.println("Time->"+tiempoTranscurrido+" segundos = "+(momentoDeLaDeteccion - person.getUltimaVezDetectado())+" milisegundos");
+    	        	person.setDetectado(true);
+    	        	person.setEnClase(false);
+    	        	person.setUltimaVezDetectado((long)momentoDeLaDeteccion);
     	        	System.out.println("Sale clase");
     			}
-    		}
-    		else{
-    			numVecesNoAparecenRostros++;
     		}
     		
         } 
         
-        if(!hayRostros){
-        	numVecesNoAparecenRostros++;
-        }
-        else{
-        	numVecesNoAparecenRostros=0;
-        }
+        for (Person person : persons) {
+        	long ultimaVezDetectado = person.getUltimaVezDetectado();
+			long momentoActual = System.currentTimeMillis();
+			long tiempoTranscurrido = momentoActual - ultimaVezDetectado;
+			if(tiempoTranscurrido>5000 && !person.isEnClase()){
+				person.setDetectado(false);
+				person.setEnClase(true);
+				System.out.println("Entra en clase");
+			}
+		}
         
-        if(!hayRostros && this.persons.size()>0 && numVecesNoAparecenRostros==15 && !entroEnClase){
-        	System.out.println("Entra en clase");
-        	entroEnClase = true;
-        	timeInicial=System.currentTimeMillis();
-        }
+    }
+    
+    private Person getPerson(int label){
+    	for (Person person : persons) {
+			if(person.getLabel()==label){
+				return person;
+			}
+		}
+    	return null;
     }
     
 	public static void resize(InputStream input, OutputStream output, int width, int height) throws Exception {

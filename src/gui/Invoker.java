@@ -33,6 +33,8 @@ public class Invoker {
 		Reader reader = new Reader(entrenamiento);
 		reader.run();
 		
+		//reader.capturePerson(entrenamiento.NUMERO_DE_USUARIOS);
+
 		
     }
 	
