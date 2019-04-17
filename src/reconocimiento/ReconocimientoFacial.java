@@ -10,7 +10,10 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -27,6 +30,7 @@ import gui.Entrenar;
 import personas.Person;
 import personas.PersonSURF;
 import reconocimiento.reconocimientoSURF.SurfCompare;
+import server.Server;
 
 public class ReconocimientoFacial {
 	 
@@ -42,9 +46,14 @@ public class ReconocimientoFacial {
     private List<PersonSURF> personsSURF;
     
     private Entrenar entrenamiento;
-    private List<Person> persons;
+    //private List<Person> persons;
+    private Map<Long, Long> personsTimes;
     
     private int cont = 95;
+    
+    //Nuevo
+    private Server server;
+    private long cameraId = 1;
     
     
     public ReconocimientoFacial(){
@@ -61,7 +70,8 @@ public class ReconocimientoFacial {
     	this.rostros = new MatOfRect();
     	
     	this.entrenamiento = entrenamiento;
-    	this.persons = new ArrayList<Person>();
+    	this.personsTimes = new HashMap<Long, Long>();
+    	this.server = new Server();
     }
     
     public void saveFaceOfPerson(Mat frame, Mat frame_gray,String rutaImagenNueva)throws Exception{
@@ -126,8 +136,8 @@ public class ReconocimientoFacial {
 			
     		Pair<Integer, Double> personPair = this.entrenamiento.test(srcSalida);
     		if(personPair!=null){
-    			int personLabel = personPair.getFirst();
-    			Person person = getPerson(personLabel);
+    			long personId = (long) personPair.getFirst();//La id es la label
+    			/*Person person = getPerson(personLabel);
     			if(person==null){
     				person = new Person(personLabel, System.currentTimeMillis());
     				this.persons.add(person);
@@ -146,12 +156,27 @@ public class ReconocimientoFacial {
     	        	person.setEnClase(false);
     	        	person.setUltimaVezDetectado((long)momentoDeLaDeteccion);
     	        	System.out.println("Sale clase");
+    			}*/
+    			
+    			long momentoActual = System.currentTimeMillis();
+    			if(!this.personsTimes.containsKey(personId)) {
+    				this.personsTimes.put(personId, momentoActual);
+    				this.server.sendMatch(this.cameraId, personId, new Date());
     			}
+    			else {
+    				long momentoUltimoMatch = this.personsTimes.get(personId);
+    				long tiempoTranscurrido = momentoActual - momentoUltimoMatch;
+    				if(tiempoTranscurrido>=5000) {
+    					this.personsTimes.replace(personId, momentoActual);
+    					this.server.sendMatch(this.cameraId, personId, new Date());
+    				}
+    			}
+    			
     		}
     		
         } 
         
-        for (Person person : persons) {
+        /*for (Person person : persons) {
         	long ultimaVezDetectado = person.getUltimaVezDetectado();
 			long momentoActual = System.currentTimeMillis();
 			long tiempoTranscurrido = momentoActual - ultimaVezDetectado;
@@ -160,18 +185,18 @@ public class ReconocimientoFacial {
 				person.setEnClase(true);
 				System.out.println("Entra en clase");
 			}
-		}
+		}*/
         
     }
     
-    private Person getPerson(int label){
+    /*private Person getPerson(int label){
     	for (Person person : persons) {
 			if(person.getLabel()==label){
 				return person;
 			}
 		}
     	return null;
-    }
+    }*/
     
 	public static void resize(InputStream input, OutputStream output, int width, int height) throws Exception {
 	    BufferedImage src = ImageIO.read(input);
