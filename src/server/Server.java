@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +18,11 @@ import model.Person;
 
 public class Server {
 	
-	private static final String URL_INSERT_MATCH = "http://localhost:8090/sendFrame/insertMatch";
+	//private static final String URL_INSERT_MATCH = "http://localhost:8090/sendFrame/insertMatch";
+	private static final String URL_INSERT_MATCH = "http://localhost:8090/servicesREST/JR/validateUser";
 	
-	public void sendMatch(long cameraId, long personId, Date fecha) throws IOException {
+	public void sendMatch(long cameraId, long personId, Date fecha) throws IOException, ParseException {
+	    
 		URL url = null;
 	    url = new URL(URL_INSERT_MATCH);
 	    HttpURLConnection urlConn = null;
@@ -34,27 +37,26 @@ public class Server {
 	    DataInputStream input = null;
 	    output = new DataOutputStream(urlConn.getOutputStream());
 	    
-	    Camera camera = new Camera(cameraId, new ArrayList<Camera>());
-	    Person person = new Person(personId);
+	    String cameraName = "camera" + cameraId;
+	    String personName = "person"+ personId;
+	    Camera camera = new Camera(cameraName);
+	    Person person = new Person(personName);
 	    
-	    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+	    /*SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 	    String day = format.format(fecha);
 	    
 	    format = new SimpleDateFormat("HH:mm:ss");
-	    String hour = format.format(fecha);
+	    String hour = format.format(fecha);*/
 	    
-	    Match match = new Match(camera, person, day, hour);
+	    Match match = new Match(camera, person, new Date());
 	    
 	    JSONObject jsonObject = match.getJson();
 	    
 	    String content = jsonObject.toString();
-
-	    /* Send the request data.*/
 	    output.writeBytes(content);
 	    output.flush();
 	    output.close();
 
-	    /* Get response data.*/
 	    String response = null;
 	    input = new DataInputStream (urlConn.getInputStream());
 	    while (null != ((response = input.readLine()))) {

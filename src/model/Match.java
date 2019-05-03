@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.json.JSONObject;
 
@@ -9,16 +10,14 @@ public class Match implements Serializable {
 	private static final long serialVersionUID = -3709323805785851011L;
 	private Camera camera;
 	private Person person;
-	private String day;
-	private String hour;
+	private Date date;
 	
 	public Match() {}
 	
-	public Match(Camera camera, Person person, String day, String hour) {
+	public Match(Camera camera, Person person, Date date) {
 		this.camera = camera;
 		this.person = person;
-		this.day = day;
-		this.hour = hour;
+		this.date = date;
 		
 		//java.sql.Date date2 = new java.sql.Date(d.getTime());
 		
@@ -40,28 +39,19 @@ public class Match implements Serializable {
 		this.camera = camera;
 	}
 
-	public String getDay() {
-		return day;
+	public Date getDate() {
+		return this.date;
 	}
 
-	public void setDay(String day) {
-		this.day = day;
-	}
-
-	public String getHour() {
-		return hour;
-	}
-
-	public void setHour(String hour) {
-		this.hour = hour;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 	public JSONObject getJson() {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("camera", this.camera.getJson());
 		jsonObject.put("person", this.person.getJson());
-		jsonObject.put("day", this.day);
-		jsonObject.put("hour", this.hour);
+		jsonObject.put("date", this.date.getTime());
 		return jsonObject;
 	}
 	

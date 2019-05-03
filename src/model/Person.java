@@ -10,25 +10,25 @@ public class Person implements Serializable {
 	 */
 	private static final long serialVersionUID = -7915536599168677189L;
 	
-	private long identificador;
+	private String name;
 	
 	public Person() {}
 	
-	public Person(long identificador) {
-		this.identificador = identificador;
+	public Person(String name) {
+		this.name = name;
 	}
 
-	public long getIdentificador() {
-		return identificador;
+	public String getName() {
+		return name;
 	}
 
-	public void setIdentificador(long identificador) {
-		this.identificador = identificador;
+	public void setIdentificador(String name) {
+		this.name = name;
 	}
 	
 	public JSONObject getJson() {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("identificador", this.identificador);
+		jsonObject.put("name", this.name);
 		return jsonObject;
 	}
 

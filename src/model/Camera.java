@@ -1,49 +1,31 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONObject;
 
 public class Camera implements Serializable {
 	
 	 private static final long serialVersionUID = 3560972546182458142L;
-	 private long identificador;
-	 private List<Camera> observers;
+	 private String name;
 	 
 	 public Camera() {}
 	 
-	 public Camera(long identificador) {
-		 this.identificador = identificador;
-		 this.observers = new ArrayList<Camera>();
-	 }
-	 
-	 public Camera(long identificador, List<Camera> observers) {
-		 this.identificador = identificador;
-		 this.observers = observers;
+	 public Camera(String name) {
+		 this.name = name;
 	 }
 
-	public long getIdentificador() {
-		return identificador;
+	public String getName() {
+		return name;
 	}
 
-	public void setIdentificador(long identificador) {
-		this.identificador = identificador;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public List<Camera> getObservers() {
-		return observers;
-	}
-
-	public void setObservers(List<Camera> observers) {
-		this.observers = observers;
-	}
-	 
+	
 	public JSONObject getJson() {
 		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("identificador", this.identificador);
-		jsonObject.put("observers", this.observers);
+		jsonObject.put("name", this.name);
 		return jsonObject;
 	}
 }

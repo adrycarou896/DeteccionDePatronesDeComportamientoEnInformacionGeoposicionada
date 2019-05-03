@@ -6,10 +6,15 @@ import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
+
+import server.Server;
 
 public class Invoker {
 	public static void main(String[] args) {	
@@ -26,13 +31,21 @@ public class Invoker {
     	//thRecorder.run();
 		
 		//System.out.println(System.getProperty("java.library.path"));
-		System.load("C:\\opencv\\build\\java\\x64\\opencv_java400.dll");
+		/*System.load("C:\\opencv\\build\\java\\x64\\opencv_java400.dll");
 		
 		Entrenar entrenamiento = new Entrenar();
 		entrenamiento.run();
 		
 		Reader reader = new Reader(entrenamiento);
-		reader.run();
+		reader.run();*/
+		
+		Server server = new Server();
+	
+		try {
+			server.sendMatch(1, 1, new Date());
+		} catch (IOException | ParseException e) {
+			e.printStackTrace();
+		}
 		
 		//reader.capturePerson(entrenamiento.NUMERO_DE_USUARIOS);
 
