@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import org.json.JSONObject;
@@ -18,8 +16,7 @@ import model.Person;
 
 public class Server {
 	
-	//private static final String URL_INSERT_MATCH = "http://localhost:8090/sendFrame/insertMatch";
-	private static final String URL_INSERT_MATCH = "http://localhost:8090/servicesREST/JR/validateUser";
+	private static final String URL_INSERT_MATCH = "http://localhost:8090/sendFrame/insertMatch";
 	
 	public void sendMatch(long cameraId, long personId, Date fecha) throws IOException, ParseException {
 	    

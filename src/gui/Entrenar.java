@@ -22,7 +22,7 @@ public class Entrenar implements Runnable{
 	
 	private FaceRecognizer faceRecognizer;
 	
-	public static final int NUMERO_DE_USUARIOS = 4;
+	public static final int NUMERO_DE_USUARIOS = 3;
 	
 	public Entrenar() {
 		this.faceRecognizer = FisherFaceRecognizer.create();

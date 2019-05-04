@@ -7,6 +7,7 @@ import org.json.JSONObject;
 public class Camera implements Serializable {
 	
 	 private static final long serialVersionUID = 3560972546182458142L;
+	 
 	 private String name;
 	 
 	 public Camera() {}
