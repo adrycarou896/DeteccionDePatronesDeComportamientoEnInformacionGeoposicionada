@@ -40,10 +40,19 @@ public class Invoker {
 		reader.run();*/
 		
 		Server server = new Server();
-	
+		
 		try {
-			server.sendMatch(1, 1, new Date());
-		} catch (IOException | ParseException e) {
+			ReadProperties properties = new ReadProperties();
+	    	try {
+				long cameraId=properties.getCameraIdentificator();
+				long personId = 1;
+				server.sendMatch(cameraId, personId, new Date());
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		

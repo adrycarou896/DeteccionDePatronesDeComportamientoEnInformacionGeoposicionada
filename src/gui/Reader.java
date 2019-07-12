@@ -1,14 +1,8 @@
 package gui;
 
-import java.io.File;
-import java.io.IOException;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
-
-import com.google.zxing.NotFoundException;
-import com.google.zxing.WriterException;
 
 import QR.Read_QR;
 import reconocimiento.ReconocimientoFacial;

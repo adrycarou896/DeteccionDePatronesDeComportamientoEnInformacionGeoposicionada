@@ -7,6 +7,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
@@ -25,6 +26,7 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 import gui.Entrenar;
+import gui.ReadProperties;
 import server.Server;
 
 public class ReconocimientoFacial {
@@ -39,7 +41,7 @@ public class ReconocimientoFacial {
     
     //Nuevo
     private Server server;
-    private long cameraId = 1;
+    private long cameraId = -1;
     
     
     public ReconocimientoFacial(){
@@ -54,6 +56,13 @@ public class ReconocimientoFacial {
     	this.entrenamiento = entrenamiento;
     	this.personsTimes = new HashMap<Long, Long>();
     	this.server = new Server();
+    	
+    	ReadProperties properties = new ReadProperties();
+    	try {
+			this.cameraId=properties.getCameraIdentificator();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
     
     public void reconocer(Mat frame, Mat frame_gray) throws Exception{
